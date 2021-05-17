@@ -38,7 +38,7 @@ sum([H|T], M) :- sum(T, N), M is H+N.
 %2.4: 
 %average(list, count, sum,avarage).
 average(L, A) :- avarage(L,0,0,A).
-average([], CS,A) := A is S/C.
+average([], CS,A) :- A is S/C.
 average([X|Xs], C, S, A) :-
 	C2 is C + 1,
 	S2 is S + X,
