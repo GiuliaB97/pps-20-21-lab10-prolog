@@ -1,33 +1,42 @@
+%1.1
+%search
 search(X, [X|_]).
 search(X, [_|Xs]):-search(X, Xs).
 
+%1.2
+%search2
 search2(X, [X,X|_]).
 search2(X, [_|Xs]):- search2(X, Xs).
 
-%2.1: search_two
+%1.3 search_two
 %test: search_two(a, [b, g, a, a, g,h])
 search_two(X, [X,_,X|_]).
 search_two(X, [_|Xs]):- search_two(X, Xs).
 
-%2.2: search_anytwo
+%1.4: search_anytwo
 %test: search_anytwo(a [b,a,e,c,a,b]
 search_anytwo(X, [X|Xs]):- search(X, Xs).
 search_anytwo(X, [_|Xs]):- search_anytwo(X, Xs).
 
+%2.1
+%size:
 size([],0).
 size([_|T], M) :-size(T,N), M is N+1.
+%No, non credo sia fully relational ma solo reasonably relational a causa dell'operatore "is".
 
 %2.2: size2
 %test: size2([E], s(zero)).
 size2([], zero).
 size2([_|T], s(N)):- size2(T, N).
+%Teoricamente credo potrebbe implementare un comportamento pure relational perchè in assenza di "is" non dovrebbero esserci problema di inferenza ed input ed output potrebbero essere scambiati, ma non sono certa di come si comporterebbe S( N).
 
 %2.3: sum
 %test: sum([10, 20], 30)
 sum([], 0).
 sum([H|T], M) :- sum(T, N), M is H+N.
 
-%2.4: list, count, sum,avarage
+%2.4: 
+%average(list, count, sum,avarage).
 average(L, A) :- avarage(L,0,0,A).
 average([], CS,A) := A is S/C.
 average([X|Xs], C, S, A) :-
@@ -64,6 +73,7 @@ minMax2([H|T], OMin, OMax) :- minMax2(T, Min, Max), OMin=Min,H>=OMax, OMax=H.
 %test: same([1, 2], [1, 2])
 same([E], [E]).
 same([H1| T1], [H2| T2]) :- same(T1, T2), H1==H2.
+%Sì, credo implementi un comportamento pure relational.
 
 %3.2 all_bigger: all_bigger( [3, 4], [2,3])
 all_bigger([E1], [E2]):- E1>E2.
