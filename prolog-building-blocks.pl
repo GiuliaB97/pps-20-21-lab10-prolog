@@ -93,7 +93,8 @@ seq(N,[0|T]):- N > 0, N2 is N-1, seq(N2,T).
 %4.2 seqR: 												TO FIX 
 %test: seqR(4,[4,3,2,1,0]).
 seqR(0,[]).
-seqR(N,_):- X is N-1, append([N],_,_), seqR(X,_).
+seqR(N,[N|T]):- X is N-1, seqR(X, L). %problema fallisce se gli passo un numero strambo come primo argomento al predicato, o come primo elemento della lista, ma non è in grado di rilevare un errore interno es seqR(4,[4,3,2,8,0]).
+
 
 %4.2 seqR2
 %test: seqL(4,[0,1,2,3,4]).
