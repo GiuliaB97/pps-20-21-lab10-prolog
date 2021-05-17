@@ -90,7 +90,7 @@ sublist([H1|T1], [_| T2]) :- sublist(T1, T2).		%the sublist could be in the midd
 seq(0,[]).
 seq(N,[0|T]):- N > 0, N2 is N-1, seq(N2,T).
 
-%4.2 seqR:  
+%4.2 seqR: 												TO FIX 
 %test: seqR(4,[4,3,2,1,0]).
 seqR(0,[]).
 seqR(N,_):- X is N-1, append([N],_,_), seqR(X,_).
@@ -105,7 +105,7 @@ seqL(N,_, T):-N > 0, N2 is N-1, T2 is T+1, append([T2],_,_), seqR(N2,_, T2).
 inv(E, E).
 inv([H|T], Rev):- inv(T, Rs), append(Rs, [H], Rev).
 
-%EXTRA double
+%EXTRA double												TO FIX
 %test: double([0, 1],[0,1,0,1])
 double([E], [E, E]).
 double([_|_], Doubled) :-  append(_, [_], Doubled).
