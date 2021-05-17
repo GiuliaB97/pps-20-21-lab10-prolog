@@ -80,10 +80,11 @@ all_bigger([E1], [E2]):- E1>E2.
 all_bigger([H1| T1], [H2| T2]):- all_bigger(T1, T2), H1>H2.
 
 %3.3 
-%test: sublist([9,1], [ 2,1])
-sublist([H1| _], [H2| _]) :- H1==H2.
-sublist([H1|_], [_| T2]) :- search(H1, T2).
-sublist([_| T1], [_| T2]) :- sublist(T1, T2).
+%test: sublist([4, 1,2,3, 5], [0,1,2,3,0]).
+sublist([],_ ).
+sublist([H|T1], [H|T2]) :- sublist(T1, T2). 		%positive case: H is the same element in both list
+sublist([H1|T1], [_| T2]) :- sublist([H1|T1], T2). 	%intermediate case: compares all the element of the second list with the head of the first
+sublist([H1|T1], [_| T2]) :- sublist(T1, T2).		%the sublist could be in the middle therefore I need to update the head of the list in the first list
 
 %4.1 seq
 seq(0,[]).
