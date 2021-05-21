@@ -97,8 +97,7 @@ seqR(0, [_]).
 seqR(N,[N|T]):- N >0, N2 is N-1, seqR(N2,T).
 
 %4.2 seqR2
-%test: seqL(4,[0,1,2,3,4]).
-%test: yes	seqR2(4,[0,1,2,3,4]).
+%test: seqR2(4,[0,1,2,3,4]).
 seqR2(0, []).
 seqR2(0, [_]).
 seqR2(N, [X,Y|Z]) :- X =< Y, N2 is N-1, seqR2(N2,[Y|Z]).
