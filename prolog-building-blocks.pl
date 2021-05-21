@@ -80,24 +80,24 @@ all_bigger([E1], [E2]):- E1>E2.
 all_bigger([H1| T1], [H2| T2]):- all_bigger(T1, T2), H1>H2.
 
 %3.3 
-%test: sublist([4, 1,2,3, 5], [0,1,2,3,0]).
+
+%test: yes sublist([4, 1,2,3, 5], [0,1,2,3,0]).		no: sublist([4, 5], [0,1,2,3,0]).
 sublist([],_ ).
-sublist([H|T1], [H|T2]) :- sublist(T1, T2). 		%positive case: H is the same element in both list
-sublist([H1|T1], [_| T2]) :- sublist([H1|T1], T2). 	%intermediate case: compares all the element of the second list with the head of the first
-sublist([H1|T1], [_| T2]) :- sublist(T1, T2).		%the sublist could be in the middle therefore I need to update the head of the list in the first list
+sublist([H|T1], [H|T2]) :- sublist(T1, T2). 		
+sublist([H1|T1], [_|T2]) :- sublist([H1|T1], T2). 	
 
 %4.1 seq
 seq(0,[]).
 seq(N,[0|T]):- N > 0, N2 is N-1, seq(N2,T).
 
 %4.2 seqR: 												
-%test: seqR(4,[4,3,2,1,0]).
+%test: yes seqR(4,[4,3,2,1,0]).			no: seqR(4,[4,3,2,5,1,0]).		seqR(4,[4,3,5,1,0]).
 seqR(0,[]).
 seqR(0, [_]).
 seqR(N,[N|T]):- N >0, N2 is N-1, seqR(N2,T).
 
 %4.2 seqR2
-%test: seqR2(4,[0,1,2,3,4]).
+%test: yes seqR2(4,[0,1,2,3,4]).		no: seqR2(4,[0,1,2,5,3,4]).	seqR2(4,[0,1,5,3,4]).
 seqR2(0, []).
 seqR2(0, [_]).
 seqR2(N, [X,Y|Z]) :- X =< Y, N2 is N-1, seqR2(N2,[Y|Z]).
