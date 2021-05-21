@@ -108,10 +108,10 @@ seqR2(N, [X,Y|Z]) :- X =< Y, N2 is N-1, seqR2(N2,[Y|Z]).
 inv(E, E).
 inv([H|T], Rev):- inv(T, Rs), append(Rs, [H], Rev).
 
-%EXTRA double												TO FIX
-%test: double([0, 1],[0,1,0,1])
-double([E], [E, E]).
-double([_|_], Doubled) :-  append(_, [_], Doubled).
+%EXTRA double												
+%test: yes double([0, 1],[0,1,0,1]).	double([0, 1, 5],[0,1,5, 0,1, 5]).		no: double([0, 1],[0,1,8, 0,1]).	double([0, 1, 5],[0,1,0,1]).
+double([],[]).
+double(L1,L2) :- append(L1, L1, L), same(L,L2).
 
 %EXTRA times
 %test: times([0], 3, [0,0,0])
