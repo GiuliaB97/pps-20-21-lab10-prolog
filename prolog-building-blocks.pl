@@ -74,45 +74,23 @@ same([H|T1], [H|T2]):- same(T1, T2).
 allBigger([H1|T1], [H2|T2]):- H1>H2,allBigger(T1, T2).
 allBigger([E1], [E2]):- E1>E2.
 
-%3.3 
-
+%3.3 sublist(List1,List2)
 %test: yes sublist([4, 1,2,3, 5], [0,1,2,3,0]).		no: sublist([4, 5], [0,1,2,3,0]).
-sublist([],_ ).
-sublist([H|T1], [H|T2]) :- sublist(T1, T2). 		
-sublist([H1|T1], [_|T2]) :- sublist([H1|T1], T2). 	
+sublist([H|T], []).
+sublist([H|T1],[H|T2]):-sublist(T1, T2),!.
+sublist([H1|T1], [H2|T2]):-sublist(T1, [H2|T2]).          %sublist([H1|T1], [H2|T2]):-sublist(T1, [H2|T2]), !.
 
-%4.1 seq
-seq(0,[]).
-seq(N,[0|T]):- N > 0, N2 is N-1, seq(N2,T).
+%4.1 seq(N,List)
+%test: Yes: seq(2, [0,0]). 	No: seq(2, [0,0,0]).
+seq(0, []).
+seq(N, [0|T]):- N2 is N-1, seq(N2, T).                    %seq(N, [0|T]):-seq(N2, T), N is N2+1.
 
-%4.2 seqR: 												
-%test: yes seqR(4,[4,3,2,1,0]).			no: seqR(4,[4,3,2,5,1,0]).		seqR(4,[4,3,5,1,0]).
-seqR(0,[]).
+%4.2 seqR(N,List)
+% test: Yes: seqR(3,[3,2,1,0]).		seqR(3, [3,2,1]).
 seqR(0, [_]).
-seqR(N,[N|T]):- N >0, N2 is N-1, seqR(N2,T).
+seqR(N, [N|T]):- N2 is N-1, seqR(N2, T).	%seqR(N, [N|T]):- seqR(N2, T), N is N2+1.
 
 %4.2 seqR2
-%test: yes seqR2(4,[0,1,2,3,4]).		no: seqR2(4,[0,1,2,5,3,4]).	seqR2(4,[0,1,5,3,4]).
-seqR2(0, []).
+% test: Yes: seqR2(3,[0,1,2,3])		seqR2(3, [1, 2,3]).
 seqR2(0, [_]).
-seqR2(N, [X,Y|Z]) :- X =< Y, N2 is N-1, seqR2(N2,[Y|Z]).
-
-%EXTRA inv
-%test: inv([0,1],[1,0])
-inv(E, E).
-inv([H|T], Rev):- inv(T, Rs), append(Rs, [H], Rev).
-
-%EXTRA double												
-%test: yes double([0, 1],[0,1,0,1]).	double([0, 1, 5],[0,1,5, 0,1, 5]).		no: double([0, 1],[0,1,8, 0,1]).	double([0, 1, 5],[0,1,0,1]).
-double([],[]).
-double(L1,L2) :- append(L1, L1, L), same(L,L2).
-
-%EXTRA times
-%test: times([0], 3, [0,0,0])
-times(_, 0, []).								%if the list must be copied 0 times, it does not matter, which list it is taken as "input", it will always unifies with the empty list.
-times(Xs, N, Ys) :- N > 0, N1 is N-1, times(Xs, N1, Ys2), append(Xs, Ys2, Ys).	%Ys2:list copied so far
-
-%EXTRA proj
-%test: proj([[a,c,d],[b]],[a,b])
-proj([], []).
-proj([[H|T] | Xs], [H|T2]) :-proj( Xs, T2). 
+seqR2(N, [H1, H2|T]):-H1<H2, N2 is N-1, seqR2(N2, [H2|T]). 	%seqR2(N, [H1, H2|T]):-seqL(N2, [H2|T]), H1<H2, N is N2+1.
