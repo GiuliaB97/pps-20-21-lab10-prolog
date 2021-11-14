@@ -1,6 +1,6 @@
 %1.1
 %search(Elem, List)
-%test: Yes: search(3, [4,5 ,2, 3, 5]). 		No:search(32, [4,5 ,2, 3, 5]).
+%test: Yes: search(3, [4,5 ,2, 3, 5]). 		  No:search(32, [4,5 ,2, 3, 5]).
 search(X, [_|Xs]):-search(X, Xs).
 search(X, [X|_]).
 
@@ -11,7 +11,7 @@ search2(X, [_|Xs]):- search2(X, Xs).
 search2(X, [X,X|_]).
 
 %1.3 search_two(Elem, List)	->	search2AnyElemBetween
-%test: search_two(3, [4,5 ,2, 3,0, 3, 5]).	No: search_two(3, [4,5 ,2, 3, 3, 5]).
+%test: search_two(3, [4,5 ,2, 3,0, 3, 5]).	  No: search_two(3, [4,5 ,2, 3, 3, 5]).
 search_two(X, [_|Xs]):- search_two(X, Xs).
 search_two(X, [X,_,X|_]).
 
