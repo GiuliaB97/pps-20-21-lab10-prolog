@@ -25,13 +25,11 @@ search_anytwo(X, [X|Xs]):- search(X, Xs).
 %test: Yes: size([1,2], 2).   No: size([1,2], 5).
 size([],0).
 size([_|T], N):- N2 is N-1, size(T, N2).		%size([_|T], N):- size(T, M2), N is M2+1.
-%No, non credo sia fully relational ma solo reasonably relational a causa dell'operatore "is".
 
 %2.2: size2(List,Size)		->	sizeNaturalNumber
 %test: Yes: size2([1,2], s(s(zero))).   No: size2([1,2], s(zero)).
 size2([], zero).
 size2([_|T], s(N)):- size2(T, N).
-%Teoricamente credo potrebbe implementare un comportamento pure relational perchè in assenza di "is" non dovrebbero esserci problema di inferenza ed input ed output potrebbero essere scambiati, ma non sono certa di come si comporterebbe S( N).
 
 %2.3: sum
 %test: Yes: sum([1,2], 3).    No:  sum([1,2], 6).
@@ -62,7 +60,6 @@ minMax([H|T],Min,H) :- minMax(T,Min,Max), H>=Max.
 %test: Yes:same([1, 2], [1,2]).   No: same([1, 2], [0,1,2]).
 same([], []).
 same([H|T1], [H|T2]):- same(T1, T2).
-%Sì, credo implementi un comportamento pure relational.
 
 %3.2 allBigger(L, L).
 %test: Yes:allBigger([11, 22, 33], [0,1,2]).	 No: allBigger([11,0, 22, 33], [0,1,2]).
