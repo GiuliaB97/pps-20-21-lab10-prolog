@@ -43,18 +43,6 @@
 % seqL(N,List)
 % test: Yes: seqL(3,[0,1,2,3])		No: seqL(3, [1, 2,3]).
 
-% dropAny(Elem,List,OutList)
-%test: Yes: dropAny(3,[0,1,2,3,7], [0,1,2,7]).		No: dropAny( 3,[0,1,2,3,7], [0,1,2,3,7]).
-
-% dropFirst(Elem,List,OutList)
-%test: Yes: dropFirst( 3,[0,1,2,3,7,3], [0,1,2,7,3]).		No: dropFirst( 3,[0,1,2,3,7,3], [0,1,2,3,7,3]).
-
-% dropLast(Elem,List,OutList)
-%test: Yes: dropLast( 3,[0,1,2,3,7,3], [0,1,2,3,7]).		No: dropLast( 3,[0,1,2,3,7,3], [0,1,2,3,7,3]).
-
-% dropAll(Elem,List,OutList)
-%test: Yes: dropAll( 3,[0,1,2,3,7,3], [0,1,2,7]).		No: dropLast( 3,[0,1,2,3,7,3], [0,1,2,3,7,3]).
-
 %EXTRA
 
 %reverse(List, OutList)
