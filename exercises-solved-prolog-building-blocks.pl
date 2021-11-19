@@ -38,9 +38,9 @@ sum([H|T], N):- N2 is N-H, sum(T, N2). 		%sum([H|T], N):- sum(T, N2), N is N2+H.
 
 %2.5: max
 %test: Yes: max([1,2, 0], 2).   No: max([1,2, 0], 1).
-max([E], E).
-max([H|T], H) :- max(T,N), H>=N.
-max([H|T], N) :- max(T,N), H<N.
+max([E], E):-!.
+max([H|T], H) :- max(T,N), H>=N, !.
+max([H|T], N) :- max(T,N).
 
 %min([2,3],2)
 %test: Yes: min([1,2, 0], 0).   No: min([1,2, 0], 2).
